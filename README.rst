@@ -54,6 +54,12 @@ Will add a ``facebook_url`` variable to the context, containing the URL for the 
 
 Will add a ``gplus_url`` variable to the context, containing the URL for the Google+ sharer popup.
 
+::
+
+  {% post_to_vk_url <object_or_url> %}
+
+Will add a ``vk_url`` variable to the context, containing the URL for the VK sharer popup.
+
 Example::
 
   {% load social_share %}
@@ -61,5 +67,6 @@ Example::
   {% post_to_facebook object_or_url "Post to Facebook!" %}
   {% post_to_twitter "New Song: {{object.title}}. Check it out!" object_or_url "Post to Twitter" %}
   {% post_to_gplus object_or_url "Post to Google+!" %}
+  {% post_to_vk object_or_url "Share this on VK!" %}
 
 Templates are in ``django_social_share/templatetags/post_to_twitter.html``, ``django_social_share/templatetags/post_to_facebook.html`` and ``django_social_share/templatetags/post_to_gplus.html``. You can override them to suit your mileage.
