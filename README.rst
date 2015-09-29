@@ -1,14 +1,14 @@
 Django Social Share
 ======================================
 
-Provides tempatetags for 'Tweet This', 'Share this on Facebook', and 'Share on Google+'.
+Provides tempatetags for 'Tweet This', 'Share this on Facebook', 'Share on Google+' and 'Share on VK'.
 
 Installation
 -------------
 
 ::
 
-    $ pip install django-social-share
+    pull django_social_share directory from github
 
 Add the app to ``INSTALLED_APPS``::
 
@@ -27,6 +27,8 @@ Usage
   {% post_to_gplus <object_or_url> <link_text> %}
 
   {% post_to_twitter <text_to_post> <object_or_url> <link_text> %}
+  
+  {% post_to_vk <object_or_url> <link_text> %}
 
 ``<text_to_post>`` may contain any valid Django Template code. Note that Facebook does not support this anymore.
 
