@@ -17,6 +17,8 @@ register = template.Library()
 TWITTER_ENDPOINT = 'http://twitter.com/intent/tweet?text=%s'
 FACEBOOK_ENDPOINT = 'http://www.facebook.com/sharer/sharer.php?u=%s'
 GPLUS_ENDPOINT = 'http://plus.google.com/share?url=%s'
+VK_ENDPOINT = 'http://vk.com/share.php?url=%s'
+
 
 def compile_text(context, text):
     ctx = template.context.Context(context)
@@ -105,5 +107,20 @@ def post_to_gplus_url(context, obj_or_url=None):
 @register.inclusion_tag('django_social_share/templatetags/post_to_gplus.html', takes_context=True)
 def post_to_gplus(context, obj_or_url=None, link_text='Post to Google+'):
     context = post_to_gplus_url(context, obj_or_url)
+    context['link_text'] = link_text
+    return context
+
+
+@register.simple_tag(takes_context=True)
+def post_to_vk_url(context, obj_or_url=None):
+    request = context.get('request', MockRequest())
+    url = _build_url(request, obj_or_url)
+    context['vk_url'] = VK_ENDPOINT % urlencode(url)
+    return context
+
+
+@register.inclusion_tag('django_social_share/templatetags/post_to_vk.html', takes_context=True)
+def post_to_vk(context, obj_or_url=None, link_text='Post to VK'):
+    context = post_to_vk_url(context, obj_or_url)
     context['link_text'] = link_text
     return context
