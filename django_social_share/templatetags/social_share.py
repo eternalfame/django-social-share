@@ -12,12 +12,15 @@ try:
 except ImportError:
     DJANGO_BITLY = False
 
+
 register = template.Library()
+
 
 TWITTER_ENDPOINT = 'http://twitter.com/intent/tweet?text=%s'
 FACEBOOK_ENDPOINT = 'http://www.facebook.com/sharer/sharer.php?u=%s'
 GPLUS_ENDPOINT = 'http://plus.google.com/share?url=%s'
 VK_ENDPOINT = 'http://vk.com/share.php?url=%s'
+
 
 
 def compile_text(context, text):
@@ -26,7 +29,8 @@ def compile_text(context, text):
 
 
 class MockRequest(object):
-    def build_absolute_uri(self, relative_url):
+    @staticmethod
+    def build_absolute_uri(relative_url):
         if relative_url.startswith('http'):
             return relative_url
         current_site = Site.objects.get_current()
