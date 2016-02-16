@@ -20,7 +20,8 @@ TWITTER_ENDPOINT = 'http://twitter.com/intent/tweet?text=%s'
 FACEBOOK_ENDPOINT = 'http://www.facebook.com/sharer/sharer.php?u=%s'
 GPLUS_ENDPOINT = 'http://plus.google.com/share?url=%s'
 VK_ENDPOINT = 'http://vk.com/share.php?url=%s'
-
+OK_ENDPOINT = "http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1&st._surl=%s"
+MAILRU_ENDPOINT = "http://connect.mail.ru/share?url=%s"
 
 
 def compile_text(context, text):
@@ -126,5 +127,35 @@ def post_to_vk_url(context, obj_or_url=None):
 @register.inclusion_tag('django_social_share/templatetags/post_to_vk.html', takes_context=True)
 def post_to_vk(context, obj_or_url=None, link_text='Post to VK'):
     context = post_to_vk_url(context, obj_or_url)
+    context['link_text'] = link_text
+    return context
+
+
+@register.simple_tag(takes_context=True)
+def post_to_ok_url(context, obj_or_url=None):
+    request = context.get('request', MockRequest())
+    url = _build_url(request, obj_or_url)
+    context['ok_url'] = OK_ENDPOINT % urlencode(url)
+    return context
+
+
+@register.inclusion_tag('django_social_share/templatetags/post_to_ok.html', takes_context=True)
+def post_to_ok(context, obj_or_url=None, link_text='Post to OK'):
+    context = post_to_ok_url(context, obj_or_url)
+    context['link_text'] = link_text
+    return context
+
+
+@register.simple_tag(takes_context=True)
+def post_to_mailru_url(context, obj_or_url=None):
+    request = context.get('request', MockRequest())
+    url = _build_url(request, obj_or_url)
+    context['mailru_url'] = MAILRU_ENDPOINT % urlencode(url)
+    return context
+
+
+@register.inclusion_tag('django_social_share/templatetags/post_to_mailru.html', takes_context=True)
+def post_to_ok(context, obj_or_url=None, link_text='Post to OK'):
+    context = post_to_mailru_url(context, obj_or_url)
     context['link_text'] = link_text
     return context
