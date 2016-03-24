@@ -12,7 +12,7 @@ Installation
 
 Add the app to ``INSTALLED_APPS``::
 
-  INSTALLED_APPS += ['django_social_share']
+  INSTALLED_APPS += ['social_share']
 
 It's recommended to add ``django.core.context_processors.request`` to your `` TEMPLATE_CONTEXT_PROCESSORS`` list. This way the templatetags will use the correct scheme and hostname.
 
