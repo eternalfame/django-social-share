@@ -13,8 +13,8 @@ settings.configure(
         'django.contrib.sessions',
         'django.contrib.contenttypes',
         'django.contrib.sites',
-        'django_social_share',
-        'django_social_share.tests',
+        'social_share',
+        'social_share.tests',
     ],
 )
 
@@ -28,7 +28,7 @@ def runtests(*test_args):
     import django.test.utils
     runner_class = django.test.utils.get_runner(settings)
     test_runner = runner_class(verbosity=1, interactive=True)
-    failures = test_runner.run_tests(['django_social_share'])
+    failures = test_runner.run_tests(['social_share'])
     sys.exit(failures)
 
 if __name__ == '__main__':

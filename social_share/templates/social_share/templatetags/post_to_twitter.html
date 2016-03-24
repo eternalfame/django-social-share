@@ -1,0 +1,4 @@
+<div class="tweet-this">
+    <a id="social-share-twitter" href="{{ tweet_url }}" class="meta-act-link meta-tweet">{{link_text}}</a>
+</div>
+<script>!function(t,e,n){var r="http://twitter.com/intent/tweet?text=",o=t.querySelector(e);if(o){var i=o.getAttribute("content").trim().substr(0,136-location.href.length)+"...";t.getElementById(n).setAttribute("href",r+encodeURIComponent(i+" "+location.href))}}(document,"meta[name='description']","social-share-twitter");</script>

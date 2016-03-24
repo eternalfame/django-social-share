@@ -35,5 +35,5 @@ setup(
     ],
     install_requires=requirements,
     test_requires=test_requirements,
-    test_suite='django_social_share.tests.runtests.runtests'
+    test_suite='social_share.tests.runtests.runtests'
 )

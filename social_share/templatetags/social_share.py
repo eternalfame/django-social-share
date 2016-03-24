@@ -38,7 +38,7 @@ class MockRequest(object):
         return '%s%s' % (current_site.domain, relative_url)
 
 
-def _build_url(request, obj_or_url):
+def __build_url(request, obj_or_url):
     if obj_or_url is not None:
         if isinstance(obj_or_url, Model):
             if DJANGO_BITLY:
@@ -48,6 +48,10 @@ def _build_url(request, obj_or_url):
         else:
             return request.build_absolute_uri(obj_or_url)
     return ''
+
+
+def _build_url(request, obj_or_url):
+    return __build_url(request, obj_or_url).replace("127.0.0.1:8111", "msb.khabkrai.ru")
 
 
 def _compose_tweet(text, url=None):
@@ -73,7 +77,7 @@ def post_to_twitter_url(context, text, obj_or_url=None):
     return context
 
 
-@register.inclusion_tag('django_social_share/templatetags/post_to_twitter.html', takes_context=True)
+@register.inclusion_tag('social_share/templatetags/post_to_twitter.html', takes_context=True)
 def post_to_twitter(context, text, obj_or_url=None, link_text='Post to Twitter'):
     context = post_to_twitter_url(context, text, obj_or_url)
 
@@ -94,7 +98,7 @@ def post_to_facebook_url(context, obj_or_url=None):
     return context
 
 
-@register.inclusion_tag('django_social_share/templatetags/post_to_facebook.html', takes_context=True)
+@register.inclusion_tag('social_share/templatetags/post_to_facebook.html', takes_context=True)
 def post_to_facebook(context, obj_or_url=None, link_text='Post to Facebook'):
     context = post_to_facebook_url(context, obj_or_url)
     context['link_text'] = link_text
@@ -109,7 +113,7 @@ def post_to_gplus_url(context, obj_or_url=None):
     return context
 
 
-@register.inclusion_tag('django_social_share/templatetags/post_to_gplus.html', takes_context=True)
+@register.inclusion_tag('social_share/templatetags/post_to_gplus.html', takes_context=True)
 def post_to_gplus(context, obj_or_url=None, link_text='Post to Google+'):
     context = post_to_gplus_url(context, obj_or_url)
     context['link_text'] = link_text
@@ -124,7 +128,7 @@ def post_to_vk_url(context, obj_or_url=None):
     return context
 
 
-@register.inclusion_tag('django_social_share/templatetags/post_to_vk.html', takes_context=True)
+@register.inclusion_tag('social_share/templatetags/post_to_vk.html', takes_context=True)
 def post_to_vk(context, obj_or_url=None, link_text='Post to VK'):
     context = post_to_vk_url(context, obj_or_url)
     context['link_text'] = link_text
@@ -139,7 +143,7 @@ def post_to_ok_url(context, obj_or_url=None):
     return context
 
 
-@register.inclusion_tag('django_social_share/templatetags/post_to_ok.html', takes_context=True)
+@register.inclusion_tag('social_share/templatetags/post_to_ok.html', takes_context=True)
 def post_to_ok(context, obj_or_url=None, link_text='Post to OK'):
     context = post_to_ok_url(context, obj_or_url)
     context['link_text'] = link_text
@@ -154,8 +158,8 @@ def post_to_mailru_url(context, obj_or_url=None):
     return context
 
 
-@register.inclusion_tag('django_social_share/templatetags/post_to_mailru.html', takes_context=True)
-def post_to_ok(context, obj_or_url=None, link_text='Post to OK'):
+@register.inclusion_tag('social_share/templatetags/post_to_mailru.html', takes_context=True)
+def post_to_mailru(context, obj_or_url=None, link_text='Post to Mail.ru'):
     context = post_to_mailru_url(context, obj_or_url)
     context['link_text'] = link_text
     return context

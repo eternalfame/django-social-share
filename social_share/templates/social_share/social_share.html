@@ -1,0 +1,10 @@
+{% load social_share %}
+
+<div class="social-share">
+    {% post_to_facebook request.path %}
+    {% post_to_gplus request.path %}
+    {% post_to_mailru request.path %}
+    {% post_to_ok request.path %}
+    {% post_to_twitter "" request.path %}
+    {% post_to_vk request.path %}
+</div>
